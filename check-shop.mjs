@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {products,categories,sanitizeCart,cartTotals,selectProducts} from './dist/catalog.js';
+assert.equal(new Set(products.map(p=>p.id)).size,products.length,'Unique product ids');
+for(const c of categories.filter(c=>c.id!=='home'))assert.ok(selectProducts({category:c.id}).length>=8,`${c.id} has working products`);
+assert.deepEqual(sanitizeCart({'pens-1':2,'fake-id':10,'pens-2':-1,'pens-3':1.5,'pens-4':100}),{'pens-1':2,'pens-4':99});
+assert.deepEqual(cartTotals({'pens-1':2,'notebooks-1':1}),{count:3,total:125000});
+assert.deepEqual(sanitizeCart(null),{});
+assert.ok(selectProducts({query:'روان نويس'}).length>0,'Persian and Arabic spelling normalized');
+assert.equal(selectProducts({favorites:['pens-1']}).length,1);
+assert.equal(selectProducts({query:'محصول‌ناموجود'}).length,0);
+const sorted=selectProducts({category:'pens',sort:'low'});assert.ok(sorted.every((p,i)=>!i||p.price>=sorted[i-1].price));
+console.log(`Passed cart totals, invalid storage, category, search, favorites and sorting checks for ${products.length} products.`);
