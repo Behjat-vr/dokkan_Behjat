@@ -1,0 +1,1 @@
+{"name":"behjat","private":true,"type":"module","scripts":{"dev":"node server/local.mjs","build":"node build.mjs","test":"node --test tests/auth.test.mjs tests/cms.test.mjs && node check-shop.mjs","db:generate":"drizzle-kit generate"},"devDependencies":{"drizzle-kit":"^0.31.4","drizzle-orm":"^0.44.5","esbuild":"^0.25.10"}}
