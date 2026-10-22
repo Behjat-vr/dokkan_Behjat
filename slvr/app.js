@@ -13,6 +13,23 @@ function playMotion(element, frames, options) {
   if (!reduceMotion && typeof element?.animate === 'function') element.animate(frames, options);
 }
 
+function addCardTilt(card) {
+  if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  card.addEventListener('pointermove', (event) => {
+    const bounds = card.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.setProperty('--tilt-x', `${x * 5}deg`);
+    card.style.setProperty('--tilt-y', `${y * -4}deg`);
+    card.classList.add('is-tilting');
+  });
+  card.addEventListener('pointerleave', () => {
+    card.classList.remove('is-tilting');
+    card.style.removeProperty('--tilt-x');
+    card.style.removeProperty('--tilt-y');
+  });
+}
+
 function addAmbientStars() {
   const positions = [
     ['8%', '28%', '#f28b9e', '17px'], ['17%', '76%', '#8c7ade', '14px'],
@@ -37,6 +54,7 @@ function addAmbientStars() {
 
 addAmbientStars();
 document.querySelectorAll('.film-card').forEach((card, index) => {
+  addCardTilt(card);
   playMotion(card, [
     { opacity: 0, transform: 'translateY(20px) scale(.94)' },
     { opacity: 1, transform: 'translateY(0) scale(1)' }

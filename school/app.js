@@ -103,8 +103,29 @@ function floatIn(element, delay = 0) {
   ], { duration: 380, delay });
 }
 
+function addCardTilt(card) {
+  if (reduceMotion || card.dataset.tiltReady || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  card.dataset.tiltReady = 'true';
+  card.addEventListener('pointermove', (event) => {
+    const bounds = card.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    card.style.setProperty('--tilt-x', `${x * 4}deg`);
+    card.style.setProperty('--tilt-y', `${y * -4}deg`);
+    card.classList.add('is-tilting');
+  });
+  card.addEventListener('pointerleave', () => {
+    card.classList.remove('is-tilting');
+    card.style.removeProperty('--tilt-x');
+    card.style.removeProperty('--tilt-y');
+  });
+}
+
 function animateCards(cards) {
-  [...cards].forEach((card, index) => floatIn(card, Math.min(index * 55, 330)));
+  [...cards].forEach((card, index) => {
+    addCardTilt(card);
+    floatIn(card, Math.min(index * 55, 330));
+  });
 }
 
 function celebrate(card) {
