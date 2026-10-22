@@ -178,6 +178,41 @@ h1 span { color: #398c69; }
   .viewer-bar { flex-basis: 50px; }
 }
 
+@media (orientation: landscape) and (max-height: 560px) {
+  .topbar { width: calc(100% - 32px); min-height: 48px; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 11px; }
+  .brand-mark svg { width: 23px; height: 23px; }
+  .top-note { font-size: 11px; }
+  .page-shell { width: calc(100% - 32px); }
+  .welcome { min-height: 74px; margin-top: 0; padding: 10px 17px; gap: 0; border-radius: 19px; }
+  .welcome-copy { max-width: none; }
+  .eyebrow { margin-bottom: 2px; font-size: 10px; }
+  h1 { font-size: clamp(20px, 3vw, 26px); line-height: 1.25; }
+  .welcome-text, .mosque-art { display: none; }
+  .filters { gap: 7px; margin: 8px 0 7px; padding: 1px 0 3px; }
+  .filter-chip { min-height: 29px; padding: 4px 12px; font-size: 11px; }
+  .library { grid-template-columns: repeat(auto-fit, minmax(min(100%, 174px), 1fr)); gap: 8px; padding-bottom: 12px; }
+  .content-card { min-height: 74px; display: flex; align-items: center; padding: 6px; border-radius: 15px; }
+  .card-art { flex: 0 0 62px; width: 62px; height: 62px; margin: 0; border-radius: 11px; }
+  .art-emoji { font-size: 35px; }
+  .card-copy { min-width: 0; min-height: 0; gap: 1px; padding: 2px 8px 2px 21px; }
+  .card-tag { font-size: 9px; }
+  .card-title { padding: 0; font-size: 11px; line-height: 1.4; }
+  .card-subtitle { display: none; }
+  .play-dot { right: auto; bottom: 5px; left: 5px; width: 21px; height: 21px; font-size: 8px; }
+  .lesson-card .card-arrow { bottom: 4px; left: 6px; font-size: 18px; }
+  .site-footer { padding: 3px 10px 8px; font-size: 10px; }
+  .viewer-bar { flex-basis: 42px; gap: 9px; padding: 0 10px; }
+  .viewer-bar h2 { font-size: 13px; }
+  .close-viewer { flex-basis: 30px; width: 30px; height: 30px; border-radius: 10px; font-size: 23px; }
+  .lesson-panel { width: min(700px, calc(100% - 24px)); padding: 12px 16px; border-radius: 18px; }
+  .lesson-icon { font-size: 32px; }
+  .lesson-panel h3 { margin: 3px 0 8px; font-size: 18px; }
+  .lesson-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  .lesson-steps li { gap: 6px; padding: 6px 7px; border-radius: 10px; font-size: 10px; line-height: 1.45; }
+  .step-number { flex-basis: 21px; width: 21px; height: 21px; font-size: 10px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }

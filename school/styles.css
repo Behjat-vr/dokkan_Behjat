@@ -177,6 +177,48 @@ body.game-open { overflow: hidden; }
   .quiz-prompt { margin-bottom: 18px; }
   .game-bar h2 { font-size: 16px; }
 }
+@media (orientation: landscape) and (max-height: 560px) {
+  .topbar { width: calc(100% - 32px); min-height: 48px; }
+  .brand-icon { width: 30px; height: 30px; border-radius: 11px; font-size: 17px; }
+  .top-note { font-size: 11px; }
+  .page-shell { width: calc(100% - 32px); }
+  .welcome { min-height: 88px; margin-top: 0; padding: 10px 17px; gap: 0; border-radius: 19px; }
+  .welcome-copy { max-width: none; }
+  .eyebrow { margin: 0 0 2px; font-size: 10px; }
+  h1 { font-size: clamp(21px, 3vw, 27px); line-height: 1.25; }
+  .welcome-text, .start-link { display: none; }
+  .welcome-art { display: none; }
+  .section-heading { margin: 10px 2px 5px; }
+  .section-heading h2 { font-size: 15px; }
+  .section-heading p { margin-top: 0; font-size: 10px; }
+  .tiny-doodle { font-size: 18px; }
+  .filters { gap: 7px; padding: 1px 0 4px; }
+  .filter-chip { padding: 4px 11px; font-size: 10px; }
+  .activities { grid-template-columns: repeat(auto-fit, minmax(min(100%, 156px), 1fr)); gap: 7px; }
+  .activity-card { min-height: 68px; gap: 7px; padding: 6px; border-radius: 14px; }
+  .card-art { flex: 0 0 54px; width: 54px; height: 54px; border-radius: 10px; font-size: 27px; }
+  .card-art i { font-size: 11px; }
+  .card-info { gap: 1px; padding: 1px 0; }
+  .card-label { font-size: 9px; }
+  .card-title { font-size: 11px; }
+  .card-note { font-size: 9px; line-height: 1.35; }
+  .card-play { left: 6px; bottom: 5px; width: 19px; height: 19px; font-size: 8px; }
+  .site-footer { display: none; }
+  .game-viewer { padding: max(5px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(6px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left)); }
+  .game-bar { min-height: 38px; grid-template-columns: 32px 1fr auto; gap: 8px; }
+  .game-bar h2 { font-size: 13px; }
+  .close-game { width: 30px; height: 30px; border-radius: 10px; font-size: 23px; }
+  .game-progress { font-size: 10px; }
+  .game-content { padding: 2px 0 4px; }
+  .quiz-card { padding: 9px 16px; border-radius: 17px; }
+  .quiz-emoji { margin-bottom: 0; font-size: 34px; line-height: 1.15; }
+  .quiz-prompt { margin-bottom: 8px; font-size: clamp(17px, 3vw, 22px); line-height: 1.45; }
+  .answers { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
+  .answer { min-height: 39px; padding: 5px 7px; border-radius: 12px; font-size: 12px; }
+  .feedback { min-height: 20px; margin: 6px 0 0; font-size: 11px; line-height: 1.4; }
+  .next-button { min-width: 120px; margin-top: 4px; padding: 7px 13px; border-radius: 11px; font-size: 12px; }
+  .finish-card .quiz-emoji { font-size: 42px; }
+}
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
