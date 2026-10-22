@@ -82,12 +82,55 @@ const title = document.querySelector('#gameTitle');
 const progress = document.querySelector('#gameProgress');
 const content = document.querySelector('#gameContent');
 const closeButton = document.querySelector('#closeGame');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let activeKey = null;
 let questionIndex = 0;
 let score = 0;
 let answered = false;
 let lastCard = null;
 let quizQuestions = [];
+
+function playMotion(element, frames, options = {}) {
+  if (!reduceMotion && typeof element?.animate === 'function') {
+    element.animate(frames, { duration: 360, easing: 'cubic-bezier(.2,.8,.2,1)', ...options });
+  }
+}
+
+function floatIn(element, delay = 0) {
+  playMotion(element, [
+    { opacity: 0, transform: 'translateY(9px) scale(.98)' },
+    { opacity: 1, transform: 'translateY(0) scale(1)' }
+  ], { duration: 380, delay });
+}
+
+function animateCards(cards) {
+  [...cards].forEach((card, index) => floatIn(card, Math.min(index * 55, 330)));
+}
+
+function celebrate(card) {
+  if (reduceMotion || !card) return;
+  const burst = document.createElement('span');
+  burst.className = 'confetti-burst';
+  burst.setAttribute('aria-hidden', 'true');
+  const colors = ['#f2879b', '#ffd166', '#76c9a6', '#8c7ade', '#72c6e8'];
+  for (let index = 0; index < 14; index += 1) {
+    const piece = document.createElement('i');
+    const angle = (Math.PI * 2 * index) / 14;
+    const distance = 56 + (index % 4) * 17;
+    piece.className = 'confetti-piece';
+    piece.style.setProperty('--burst-x', `${Math.cos(angle) * distance}px`);
+    piece.style.setProperty('--burst-y', `${Math.sin(angle) * distance}px`);
+    piece.style.setProperty('--burst-turn', `${index % 2 ? 230 : -230}deg`);
+    piece.style.setProperty('--burst-color', colors[index % colors.length]);
+    piece.style.setProperty('--burst-delay', `${(index % 4) * 18}ms`);
+    burst.append(piece);
+  }
+  card.append(burst);
+  requestAnimationFrame(() => burst.classList.add('is-running'));
+  window.setTimeout(() => burst.remove(), 900);
+}
+
+animateCards(grid.querySelectorAll('.activity-card'));
 
 function questionsFor(key) {
   const source = activities[key].questions;
@@ -106,6 +149,10 @@ function openActivity(key, card) {
   title.textContent = activities[key].title;
   viewer.hidden = false;
   document.body.classList.add('game-open');
+  playMotion(viewer, [
+    { opacity: 0.5 },
+    { opacity: 1 }
+  ], { duration: 240 });
   renderQuestion();
   closeButton.focus({ preventScroll: true });
 }
@@ -127,6 +174,13 @@ function renderQuestion() {
       '<p class="feedback" id="feedback" aria-live="polite"></p>' +
       '<button class="next-button" id="nextQuestion" type="button" hidden>السؤال التالي ←</button>' +
     '</div>';
+  floatIn(content.querySelector('.quiz-card'));
+  content.querySelectorAll('.answer').forEach((button, index) => {
+    playMotion(button, [
+      { opacity: 0, transform: 'translateY(7px) scale(.97)' },
+      { opacity: 1, transform: 'translateY(0) scale(1)' }
+    ], { duration: 280, delay: index * 65 });
+  });
   answered = false;
 }
 
@@ -141,6 +195,14 @@ function showFinish() {
       '<div class="finish-note">' + stars + '<br>من ٣ أسئلة، ' + toArabicDigits(score) + ' إجابات صحيحة.<br>ستتعلّم شيئًا جديدًا في كل مرة تلعب فيها.</div>' +
       '<button class="next-button" id="replayGame" type="button">هل نلعب مرة أخرى؟</button>' +
     '</div>';
+  const finishCard = content.querySelector('.finish-card');
+  floatIn(finishCard);
+  playMotion(finishCard.querySelector('.quiz-emoji'), [
+    { transform: 'rotate(-12deg) scale(.7)' },
+    { transform: 'rotate(10deg) scale(1.12)' },
+    { transform: 'rotate(0) scale(1)' }
+  ], { duration: 520 });
+  if (score === total) celebrate(finishCard);
 }
 
 function closeActivity() {
@@ -168,13 +230,28 @@ content.addEventListener('click', (event) => {
       if (button.dataset.answer === question.answer) button.classList.add('correct');
     });
     const isCorrect = answerButton.dataset.answer === question.answer;
+    const feedback = document.querySelector('#feedback');
     if (isCorrect) {
       score += 1;
-      document.querySelector('#feedback').textContent = question.fact ? 'أحسنت! ' + question.fact : activities[activeKey].success;
+      feedback.textContent = question.fact ? 'أحسنت! ' + question.fact : activities[activeKey].success;
+      playMotion(answerButton, [
+        { transform: 'scale(1)' },
+        { transform: 'scale(1.1) rotate(-2deg)' },
+        { transform: 'scale(1) rotate(0)' }
+      ], { duration: 380 });
+      celebrate(content.querySelector('.quiz-card'));
     } else {
       answerButton.classList.add('wrong');
-      document.querySelector('#feedback').textContent = 'لا بأس! ' + (question.fact || ('الإجابة الصحيحة «' + question.answer + '» هي.'));
+      feedback.textContent = 'لا بأس! ' + (question.fact || ('الإجابة الصحيحة «' + question.answer + '» هي.'));
+      playMotion(answerButton, [
+        { transform: 'translateX(0)' },
+        { transform: 'translateX(-7px)' },
+        { transform: 'translateX(7px)' },
+        { transform: 'translateX(-4px)' },
+        { transform: 'translateX(0)' }
+      ], { duration: 300 });
     }
+    floatIn(feedback);
     answered = true;
     const next = document.querySelector('#nextQuestion');
     next.hidden = false;
@@ -213,9 +290,17 @@ document.querySelectorAll('.filter-chip').forEach((chip) => {
       other.setAttribute('aria-pressed', String(selected));
     });
     const filter = chip.dataset.filter;
+    const visibleCards = [];
     document.querySelectorAll('.activity-card').forEach((card) => {
       card.hidden = filter !== 'all' && card.dataset.category !== filter;
+      if (!card.hidden) visibleCards.push(card);
     });
+    animateCards(visibleCards);
+    playMotion(chip, [
+      { transform: 'scale(1)' },
+      { transform: 'scale(1.08)' },
+      { transform: 'scale(1)' }
+    ], { duration: 280 });
   });
 });
 

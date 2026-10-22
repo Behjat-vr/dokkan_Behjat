@@ -40,7 +40,27 @@ const viewer = document.querySelector('#viewer');
 const viewerTitle = document.querySelector('#viewerTitle');
 const viewerContent = document.querySelector('#viewerContent');
 const closeViewerButton = document.querySelector('#closeViewer');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lastFocusedCard = null;
+
+function playMotion(element, frames, options = {}) {
+  if (!reduceMotion && typeof element?.animate === 'function') {
+    element.animate(frames, { duration: 380, easing: 'cubic-bezier(.2,.8,.2,1)', ...options });
+  }
+}
+
+function floatIn(element, delay = 0) {
+  playMotion(element, [
+    { opacity: 0, transform: 'translateY(10px) scale(.98)' },
+    { opacity: 1, transform: 'translateY(0) scale(1)' }
+  ], { duration: 420, delay });
+}
+
+function animateCards(cards) {
+  [...cards].forEach((card, index) => floatIn(card, Math.min(index * 55, 330)));
+}
+
+animateCards(document.querySelectorAll('.content-card'));
 
 function makeFrame(src, title) {
   const frame = document.createElement('iframe');
@@ -64,6 +84,13 @@ function showLesson() {
       <li><span class="step-number">٣</span><span>نحافظ على نظافة المسجد ونتعامل بلطف مع الجميع.</span></li>
     </ol>`;
   viewerContent.append(panel);
+  floatIn(panel);
+  panel.querySelectorAll('.lesson-icon, h3, .lesson-steps li').forEach((part, index) => {
+    playMotion(part, [
+      { opacity: 0, transform: 'translateY(8px) scale(.96)' },
+      { opacity: 1, transform: 'translateY(0) scale(1)' }
+    ], { duration: 360, delay: 60 + index * 65, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
 }
 
 function openViewer(itemKey, card) {
@@ -75,6 +102,10 @@ function openViewer(itemKey, card) {
   viewerContent.replaceChildren();
   viewer.hidden = false;
   document.body.classList.add('viewer-open');
+  playMotion(viewer.querySelector('.viewer-bar'), [
+    { opacity: 0, transform: 'translateY(-8px)' },
+    { opacity: 1, transform: 'translateY(0)' }
+  ], { duration: 280 });
 
   if (item.type === 'lesson') {
     showLesson();
@@ -94,7 +125,14 @@ function closeViewer() {
   viewer.hidden = true;
   document.body.classList.remove('viewer-open');
   viewerContent.replaceChildren();
-  if (lastFocusedCard?.isConnected) lastFocusedCard.focus({ preventScroll: true });
+  if (lastFocusedCard?.isConnected) {
+    lastFocusedCard.focus({ preventScroll: true });
+    playMotion(lastFocusedCard, [
+      { transform: 'scale(1)' },
+      { transform: 'scale(1.035)' },
+      { transform: 'scale(1)' }
+    ], { duration: 320 });
+  }
   lastFocusedCard = null;
 }
 
@@ -125,9 +163,17 @@ document.querySelectorAll('.filter-chip').forEach((chip) => {
     });
 
     const category = chip.dataset.filter;
+    const visibleCards = [];
     document.querySelectorAll('.content-card').forEach((card) => {
       card.hidden = category !== 'all' && card.dataset.category !== category;
+      if (!card.hidden) visibleCards.push(card);
     });
+    animateCards(visibleCards);
+    playMotion(chip, [
+      { transform: 'scale(1)' },
+      { transform: 'scale(1.08)' },
+      { transform: 'scale(1)' }
+    ], { duration: 280 });
   });
 });
 

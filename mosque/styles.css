@@ -38,6 +38,8 @@ button { -webkit-tap-highlight-color: transparent; }
 .sky-shape { position: fixed; z-index: 0; pointer-events: none; border-radius: 50%; opacity: .72; }
 .sky-shape-one { width: 155px; height: 155px; top: 90px; left: -98px; background: #b9edd1; }
 .sky-shape-two { width: 102px; height: 102px; top: 125px; right: -66px; background: #ffe5a4; }
+.sky-shape-one { animation: cloud-drift 7s ease-in-out infinite; }
+.sky-shape-two { animation: cloud-drift 8s ease-in-out -2.4s infinite reverse; }
 
 .topbar, .page-shell, .site-footer { position: relative; z-index: 1; }
 .topbar {
@@ -111,8 +113,10 @@ h1 span { color: #398c69; }
 .content-card:focus-visible, .filter-chip:focus-visible, .close-viewer:focus-visible { outline: 3px solid #edb85d; outline-offset: 3px; }
 .content-card[hidden] { display: none; }
 .card-art { position: relative; display: grid; place-items: center; height: 164px; margin: 9px 9px 0; overflow: hidden; border-radius: 15px; background: #ccefe0; }
-.art-emoji { position: relative; z-index: 1; font-size: 64px; filter: drop-shadow(0 8px 10px rgba(42, 83, 65, .16)); }
-.art-spark { position: absolute; top: 15px; right: 22px; color: rgba(255,255,255,.92); font-size: 21px; }
+.art-emoji { position: relative; z-index: 1; font-size: 64px; filter: drop-shadow(0 8px 10px rgba(42, 83, 65, .16)); animation: emoji-float 3.2s ease-in-out infinite; }
+.content-card:nth-child(3n + 2) .art-emoji { animation-delay: -1.1s; }
+.content-card:nth-child(3n) .art-emoji { animation-delay: -2s; }
+.art-spark { position: absolute; top: 15px; right: 22px; color: rgba(255,255,255,.92); font-size: 21px; animation: sparkle 2.1s ease-in-out infinite; }
 .art-adab { background: linear-gradient(145deg, #bcebd7, #e9faec 52%, #f8d887); }
 .art-prayer { background: radial-gradient(circle at 72% 24%, #ffdd89 0 13%, transparent 13.5%), linear-gradient(145deg,#bee9ed,#8ed1c1 58%,#57a67f); }
 .art-prayer::after { content: '☾'; position: absolute; top: 9px; right: 22px; color: #fff6cb; font-size: 27px; }
@@ -147,6 +151,19 @@ h1 span { color: #398c69; }
 .lesson-steps { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; text-align: right; }
 .lesson-steps li { display: flex; align-items: center; gap: 11px; padding: 12px 13px; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; background: rgba(255,255,255,.11); color: white; font-size: 14px; line-height: 1.8; }
 .step-number { display: grid; flex: 0 0 27px; place-items: center; width: 27px; height: 27px; border-radius: 50%; color: #28694f; background: #fff0b5; font-size: 12px; font-weight: 800; }
+
+@keyframes cloud-drift {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(10px, -12px, 0); }
+}
+@keyframes emoji-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-6px) rotate(2deg); }
+}
+@keyframes sparkle {
+  0%, 100% { opacity: .5; transform: scale(.82) rotate(-12deg); }
+  50% { opacity: 1; transform: scale(1.12) rotate(10deg); }
+}
 
 @media (max-width: 760px) {
   .topbar { width: calc(100% - 32px); min-height: 65px; }

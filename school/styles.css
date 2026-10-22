@@ -28,8 +28,8 @@ body {
 button,a { font: inherit; }
 button { -webkit-tap-highlight-color: transparent; }
 .decoration { position: fixed; z-index: 0; pointer-events: none; }
-.decor-one { top: 22%; left: 4%; color: #f6bf4b; font-size: 38px; transform: rotate(14deg); }
-.decor-two { right: 3%; bottom: 12%; color: #8ed1ba; font-size: 26px; }
+.decor-one { top: 22%; left: 4%; color: #f6bf4b; font-size: 38px; transform: rotate(14deg); animation: star-wiggle 3.2s ease-in-out infinite; }
+.decor-two { right: 3%; bottom: 12%; color: #8ed1ba; font-size: 26px; animation: planet-float 4s ease-in-out infinite; }
 .topbar,.page-shell,.site-footer { position: relative; z-index: 1; }
 .topbar {
   width: min(1060px,calc(100% - 40px));
@@ -101,7 +101,9 @@ h1 span { color: #7667c8; }
 .activity-card:hover { transform: translateY(-3px); box-shadow: 0 13px 28px rgba(76,83,127,.12); }
 .activity-card:focus-visible,.filter-chip:focus-visible,.close-game:focus-visible,.answer:focus-visible,.next-button:focus-visible { outline: 3px solid #7566c8; outline-offset: 3px; }
 .card-art { flex: 0 0 92px; height: 92px; position: relative; display: grid; place-items: center; overflow: hidden; border-radius: 17px; font-size: 43px; }
-.card-art > span { z-index: 1; filter: drop-shadow(0 4px 2px rgba(0,0,0,.08)); }
+.card-art > span { z-index: 1; filter: drop-shadow(0 4px 2px rgba(0,0,0,.08)); animation: icon-hop 3s ease-in-out infinite; }
+.activity-card:nth-child(3n + 2) .card-art > span { animation-delay: -1.05s; }
+.activity-card:nth-child(3n) .card-art > span { animation-delay: -1.8s; }
 .card-art i { position: absolute; left: 7px; bottom: 4px; font-style: normal; font-size: 17px; font-weight: 800; color: rgba(62,65,103,.44); }
 .card-math .card-art { background: linear-gradient(145deg,#ffe7a5,#fff7d8); }
 .card-letters .card-art { background: linear-gradient(145deg,#dff6d8,#efffe9); }
@@ -127,7 +129,7 @@ body.game-open { overflow: hidden; }
 .close-game { width: 42px; height: 42px; border: 0; border-radius: 15px; color: #695b9e; background: #fff; box-shadow: 0 5px 16px rgba(73,77,126,.1); cursor: pointer; font-size: 29px; line-height: 1; }
 .game-progress { color: #7c759a; font-size: 13px; font-weight: 700; white-space: nowrap; }
 .game-content { width: min(640px,100%); flex: 1; min-height: 0; margin: 0 auto; display: flex; align-items: center; justify-content: center; padding: 12px 0 24px; }
-.quiz-card { width: 100%; padding: clamp(22px,5vw,42px); border: 1px solid rgba(255,255,255,.9); border-radius: 30px; background: rgba(255,255,255,.9); box-shadow: 0 18px 45px rgba(76,83,127,.1); text-align: center; }
+.quiz-card { position: relative; overflow: hidden; width: 100%; padding: clamp(22px,5vw,42px); border: 1px solid rgba(255,255,255,.9); border-radius: 30px; background: rgba(255,255,255,.9); box-shadow: 0 18px 45px rgba(76,83,127,.1); text-align: center; }
 .quiz-emoji { margin-bottom: 8px; font-size: 58px; line-height: 1.3; }
 .quiz-prompt { margin: 0 auto 24px; color: #3f4c68; font-size: clamp(20px,4vw,29px); line-height: 1.7; font-weight: 800; }
 .answers { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; }
@@ -142,6 +144,28 @@ body.game-open { overflow: hidden; }
 .finish-card .quiz-emoji { font-size: 72px; }
 .finish-card .quiz-prompt { margin-bottom: 8px; }
 .finish-note { color: #828ba0; line-height: 1.8; }
+.confetti-burst { position: absolute; z-index: 3; inset: 0; overflow: hidden; border-radius: inherit; pointer-events: none; }
+.confetti-piece { position: absolute; top: 43%; left: 50%; width: 8px; height: 12px; border-radius: 3px; background: var(--burst-color); opacity: 0; }
+.confetti-piece:nth-child(3n) { width: 10px; height: 10px; border-radius: 50%; }
+.confetti-burst.is-running .confetti-piece { animation: confetti-pop 760ms cubic-bezier(.18,.68,.25,1) var(--burst-delay) both; }
+
+@keyframes star-wiggle {
+  0%, 100% { transform: rotate(14deg) translateY(0) scale(.9); opacity: .75; }
+  50% { transform: rotate(-8deg) translateY(-9px) scale(1.12); opacity: 1; }
+}
+@keyframes planet-float {
+  0%, 100% { transform: translateY(0) scale(.92); opacity: .72; }
+  50% { transform: translateY(-10px) scale(1.08); opacity: 1; }
+}
+@keyframes icon-hop {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  48% { transform: translateY(-4px) rotate(-3deg); }
+}
+@keyframes confetti-pop {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.35) rotate(0); }
+  12% { opacity: 1; }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) scale(.75) rotate(var(--burst-turn)); }
+}
 
 @media (max-width: 760px) {
   .activities { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
@@ -220,6 +244,6 @@ body.game-open { overflow: hidden; }
   .finish-card .quiz-emoji { font-size: 42px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  *,*::before,*::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  *,*::before,*::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
 }
 
