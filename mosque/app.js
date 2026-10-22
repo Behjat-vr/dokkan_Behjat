@@ -1,35 +1,35 @@
 const items = {
   'mosque-adab': {
-    title: 'آداب مسجد',
+    title: 'آداب المسجد',
     type: 'lesson'
   },
   salah: {
-    title: 'نماز در مسجد',
+    title: 'الصلاة في المسجد',
     type: 'aparat',
     id: 'NXiEn'
   },
   amanat: {
-    title: 'امانت‌داری؛ قصه‌ای از امام علی (ع)',
+    title: 'الأمانة: قصة عن الإمام علي (ع)',
     type: 'aparat',
     id: 'dYrom'
   },
   'good-morals': {
-    title: 'داستان نیکوکاری',
+    title: 'قصة عن الإحسان',
     type: 'shiatv',
     id: '61cebf9f3218be972e46'
   },
   respect: {
-    title: 'احترام به بزرگ‌ترها',
+    title: 'احترام الكبار',
     type: 'shiatv',
     id: '31dade3e8ef4916a3e82'
   },
   'prophet-advice': {
-    title: 'پندهایی از پیامبر (ص)',
+    title: 'كلمات من النبي (ص)',
     type: 'shiatv',
     id: 'f75f539a2d44326694b5'
   },
   noha: {
-    title: 'نوای حسینی',
+    title: 'نشيد حسيني للأطفال',
     type: 'shiatv',
     id: 'f7736089c757404650e4'
   }
@@ -57,11 +57,11 @@ function showLesson() {
   panel.className = 'lesson-panel';
   panel.innerHTML = `
     <div class="lesson-icon" aria-hidden="true">🕌</div>
-    <h3>در مسجد چه کارهای قشنگی می‌کنیم؟</h3>
+    <h3>ماذا نفعل في المسجد؟</h3>
     <ol class="lesson-steps">
-      <li><span class="step-number">۱</span><span>با آرامش وارد می‌شویم و سلام می‌کنیم.</span></li>
-      <li><span class="step-number">۲</span><span>صدایمان را آرام نگه می‌داریم تا همه راحت باشند.</span></li>
-      <li><span class="step-number">۳</span><span>به تمیزی مسجد کمک می‌کنیم و با دیگران مهربانیم.</span></li>
+      <li><span class="step-number">١</span><span>ندخل بهدوء ونلقي السلام.</span></li>
+      <li><span class="step-number">٢</span><span>نخفض أصواتنا حتى يشعر الجميع بالراحة.</span></li>
+      <li><span class="step-number">٣</span><span>نحافظ على نظافة المسجد ونتعامل بلطف مع الجميع.</span></li>
     </ol>`;
   viewerContent.append(panel);
 }

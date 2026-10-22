@@ -1,74 +1,78 @@
+function toArabicDigits(value) {
+  return String(value).replace(/[0-9]/g, (digit) => String.fromCharCode(digit.charCodeAt(0) + 1584));
+}
+
 const activities = {
   math: {
-    title: 'ریاضیِ شیرین',
+    title: 'رياضيات ممتعة',
     emoji: '🍎',
     questions: () => {
       const a = 2 + Math.floor(Math.random() * 7);
       const b = 1 + Math.floor(Math.random() * 6);
       const answer = a + b;
-      return { emoji: '🍎 🍐', prompt: a + ' + ' + b + ' چند می‌شود؟', answer: String(answer), choices: [String(answer), String(answer + 1), String(answer - 1)] };
+      return { emoji: '🍎 🍐', prompt: '<bdi dir="ltr">' + toArabicDigits(a) + ' + ' + toArabicDigits(b) + ' = ؟</bdi>', answer: String(answer), choices: [String(answer), String(answer + 1), String(answer - 1)] };
     },
-    success: 'آفرین! جمع را درست پیدا کردی.'
+    success: 'أحسنت! أجبت عن مسألة الجمع بشكل صحيح.'
   },
   space: {
-    title: 'سفر به فضا',
+    title: 'رحلة إلى الفضاء',
     emoji: '🪐',
     questions: [
-      { emoji: '🔴', prompt: 'کدام سیاره را سیارهٔ سرخ می‌نامند؟', answer: 'مریخ', choices: ['مریخ', 'زمین', 'نپتون'], fact: 'به‌خاطر خاک سرخ‌رنگش، به مریخ سیارهٔ سرخ می‌گویند.' },
-      { emoji: '🌍', prompt: 'ما روی کدام سیاره زندگی می‌کنیم؟', answer: 'زمین', choices: ['زحل', 'زمین', 'مشتری'], fact: 'خانهٔ ما زمین است؛ سیاره‌ای پر از آب و زندگی.' },
-      { emoji: '💍', prompt: 'کدام سیاره حلقه‌های بزرگ و دیدنی دارد؟', answer: 'زحل', choices: ['عطارد', 'زحل', 'مریخ'], fact: 'حلقه‌های زحل از تکه‌های یخ و سنگ ساخته شده‌اند.' }
+      { emoji: '🔴', prompt: 'أي كوكب يُسمّى الكوكب الأحمر؟', answer: 'المريخ', choices: ['المريخ', 'الأرض', 'نبتون'], fact: 'يُسمّى المريخ الكوكب الأحمر بسبب تربته الحمراء.' },
+      { emoji: '🌍', prompt: 'على أي كوكب نعيش؟', answer: 'الأرض', choices: ['زحل', 'الأرض', 'المشتري'], fact: 'الأرض بيتنا؛ كوكب مليء بالماء والحياة.' },
+      { emoji: '💍', prompt: 'أي كوكب له حلقات كبيرة وجميلة؟', answer: 'زحل', choices: ['عطارد', 'زحل', 'المريخ'], fact: 'تتكوّن حلقات زحل من قطع الجليد والصخور.' }
     ],
-    success: 'درست گفتی، کاوشگر کوچولو!'
+    success: 'أحسنت يا مستكشف صغير!'
   },
   float: {
-    title: 'شناور یا غرق؟',
+    title: 'يطفو أم يغرق؟',
     emoji: '🧪',
     questions: [
-      { emoji: '🪵', prompt: 'یک تکه چوب را در آب بیندازیم؛ چه می‌شود؟', answer: 'روی آب می‌ماند', choices: ['روی آب می‌ماند', 'ته آب می‌رود'], fact: 'چوب معمولاً سبک‌تر از آبی است که جابه‌جا می‌کند، پس روی آب می‌ماند.' },
-      { emoji: '🪨', prompt: 'یک سنگ کوچک در آب چه می‌کند؟', answer: 'ته آب می‌رود', choices: ['روی آب می‌ماند', 'ته آب می‌رود'], fact: 'سنگ از مقدار آبی که جابه‌جا می‌کند سنگین‌تر است، پس پایین می‌رود.' },
-      { emoji: '🧽', prompt: 'یک اسفنج خشک روی آب چه می‌کند؟', answer: 'روی آب می‌ماند', choices: ['روی آب می‌ماند', 'ته آب می‌رود'], fact: 'اسفنج خشک پر از هواست و اول روی آب شناور می‌ماند.' }
+      { emoji: '🪵', prompt: 'ماذا يحدث إذا وضعنا قطعة خشب في الماء؟', answer: 'يطفو على الماء', choices: ['يطفو على الماء', 'يغرق إلى القاع'], fact: 'الخشب عادة أخفّ من الماء الذي يزيحه، لذلك يطفو.' },
+      { emoji: '🪨', prompt: 'ماذا يحدث لحجر صغير في الماء؟', answer: 'يغرق إلى القاع', choices: ['يطفو على الماء', 'يغرق إلى القاع'], fact: 'الحجر أثقل من الماء الذي يزيحه، لذلك يغرق.' },
+      { emoji: '🧽', prompt: 'ماذا يحدث لإسفنجة جافة على الماء؟', answer: 'يطفو على الماء', choices: ['يطفو على الماء', 'يغرق إلى القاع'], fact: 'الإسفنجة الجافة مليئة بالهواء، لذلك تطفو في البداية.' }
     ],
-    success: 'آزمایشگر باهوش!'
+    success: 'أحسنت أيها العالِم!'
   },
   words: {
-    title: 'حرف گمشده',
+    title: 'الحرف المفقود',
     emoji: '📖',
     questions: [
-      { emoji: '📚', prompt: 'جای خالی را پر کن: ک_تاب', answer: 'ت', choices: ['ت', 'م', 'ر'], fact: 'ک + ت + ا + ب می‌شود کتاب.' },
-      { emoji: '🏫', prompt: 'جای خالی را پر کن: مد_سه', answer: 'ر', choices: ['ن', 'ر', 'ب'], fact: 'مد + ر + سه می‌شود مدرسه.' },
-      { emoji: '🌧️', prompt: 'جای خالی را پر کن: بارا_', answer: 'ن', choices: ['د', 'ن', 'م'], fact: 'بارا + ن می‌شود باران.' }
+      { emoji: '📚', prompt: 'أكمل الحرف الناقص: ك_تاب', answer: 'ت', choices: ['ت', 'م', 'ر'], fact: 'بإضافة ت تصبح الكلمة: كتاب.' },
+      { emoji: '🏫', prompt: 'أكمل الحرف الناقص: م_رسة', answer: 'د', choices: ['م', 'د', 'ك'], fact: 'بإضافة د تصبح الكلمة: مدرسة.' },
+      { emoji: '🌙', prompt: 'أكمل الحرف الناقص: ق_ر', answer: 'م', choices: ['م', 'س', 'ب'], fact: 'بإضافة م تصبح الكلمة: قمر.' }
     ],
-    success: 'چه خوب کلمه‌ها را می‌شناسی!'
+    success: 'أحسنت! أنت تعرف الكلمات جيدًا.'
   },
   english: {
-    title: 'کلمه‌های رنگی',
+    title: 'كلمات جديدة',
     emoji: '🐾',
     questions: [
-      { emoji: '🐱', prompt: 'Cat یعنی چه؟', answer: 'گربه', choices: ['گربه', 'ماهی', 'پرنده'], fact: 'Cat یعنی گربه. صدای گربه را هم می‌شناسی؟' },
-      { emoji: '☀️', prompt: 'Sun یعنی چه؟', answer: 'خورشید', choices: ['ماه', 'خورشید', 'ابر'], fact: 'Sun یعنی خورشید؛ ستارهٔ روشن روز ما.' },
-      { emoji: '🐶', prompt: 'Dog یعنی چه؟', answer: 'سگ', choices: ['خرگوش', 'سگ', 'اسب'], fact: 'Dog یعنی سگ؛ یک دوست وفادار.' }
+      { emoji: '🐱', prompt: 'ما معنى كلمة Cat؟', answer: 'قطة', choices: ['قطة', 'سمكة', 'طائر'], fact: 'Cat تعني قطة. هل تعرف صوتها؟' },
+      { emoji: '☀️', prompt: 'ما معنى كلمة Sun؟', answer: 'الشمس', choices: ['القمر', 'الشمس', 'سحابة'], fact: 'Sun تعني الشمس؛ نجمنا المضيء في النهار.' },
+      { emoji: '🐶', prompt: 'ما معنى كلمة Dog؟', answer: 'كلب', choices: ['أرنب', 'كلب', 'حصان'], fact: 'Dog تعني كلبًا؛ صديقًا وفيًا.' }
     ],
-    success: 'عالی بود! یک واژهٔ تازه یاد گرفتی.'
+    success: 'رائع! تعلّمت كلمة جديدة.'
   },
   pattern: {
-    title: 'الگوی عجیب',
+    title: 'النمط الغامض',
     emoji: '🧩',
     questions: [
-      { emoji: '🔴 🔵 🔴 🔵 ❔', prompt: 'شکل بعدی کدام است؟', answer: '🔴', choices: ['🔴', '🔵', '🟡'], fact: 'رنگ‌ها یکی‌درمیان تکرار می‌شوند.' },
-      { emoji: '⭐ 🌙 ⭐ 🌙 ❔', prompt: 'بعد از ماه چه شکلی می‌آید؟', answer: '⭐', choices: ['☁️', '⭐', '🌙'], fact: 'ستاره و ماه یکی‌درمیان آمده‌اند.' },
-      { emoji: '🟩 🟩 🟨 🟩 🟩 ❔', prompt: 'کدام رنگ جای خالی را پر می‌کند؟', answer: '🟨', choices: ['🟩', '🟨', '🟥'], fact: 'بعد از دو مربع سبز، یک مربع زرد می‌آید.' }
+      { emoji: '🔴 🔵 🔴 🔵 ❔', prompt: 'ما الشكل التالي؟', answer: '🔴', choices: ['🔴', '🔵', '🟡'], fact: 'الألوان تتناوب في هذا النمط.' },
+      { emoji: '⭐ 🌙 ⭐ 🌙 ❔', prompt: 'أي شكل يأتي بعد القمر؟', answer: '⭐', choices: ['☁️', '⭐', '🌙'], fact: 'يتناوب النجم والقمر في هذا النمط.' },
+      { emoji: '🟩 🟩 🟨 🟩 🟩 ❔', prompt: 'أي لون يُكمل النمط؟', answer: '🟨', choices: ['🟩', '🟨', '🟥'], fact: 'بعد مربعين أخضرين يأتي مربع أصفر.' }
     ],
-    success: 'الگوها دیگر راز نیستند!'
+    success: 'لم تعد الأنماط سرًا!'
   },
   world: {
-    title: 'خانهٔ حیوان‌ها',
+    title: 'موطن الحيوانات',
     emoji: '🌍',
     questions: [
-      { emoji: '🐪', prompt: 'شتر بیشتر در کجا زندگی می‌کند؟', answer: 'بیابان', choices: ['بیابان', 'قطب شمال', 'اقیانوس'], fact: 'شتر برای زندگی در جاهای گرم و خشک سازگار شده است.' },
-      { emoji: '🐻‍❄️', prompt: 'خرس قطبی کجا زندگی می‌کند؟', answer: 'جای سرد و یخی', choices: ['جنگل گرم', 'جای سرد و یخی', 'بیابان'], fact: 'خرس قطبی در نواحی سرد نزدیک قطب شمال زندگی می‌کند.' },
-      { emoji: '🐠', prompt: 'ماهی کجا خانه دارد؟', answer: 'آب', choices: ['درخت', 'آب', 'غار خشک'], fact: 'ماهی با آبشش در آب نفس می‌کشد.' }
+      { emoji: '🐪', prompt: 'أين يعيش الجمل غالبًا؟', answer: 'الصحراء', choices: ['الصحراء', 'القطب الشمالي', 'المحيط'], fact: 'الجمل متأقلم للعيش في الأماكن الحارة والجافة.' },
+      { emoji: '🐻‍❄️', prompt: 'أين يعيش الدب القطبي؟', answer: 'مكان بارد وجليدي', choices: ['غابة دافئة', 'مكان بارد وجليدي', 'الصحراء'], fact: 'يعيش الدب القطبي في المناطق الباردة قرب القطب الشمالي.' },
+      { emoji: '🐠', prompt: 'أين تعيش السمكة؟', answer: 'الماء', choices: ['الشجرة', 'الماء', 'كهف جاف'], fact: 'تتنفّس السمكة بالخياشيم في الماء.' }
     ],
-    success: 'تو یک راهنمای طبیعتی!'
+    success: 'أنت دليل بارع للطبيعة!'
   }
 };
 
@@ -109,30 +113,33 @@ function openActivity(key, card) {
 function renderQuestion() {
   const quiz = activities[activeKey];
   const question = quizQuestions[questionIndex];
-  progress.textContent = 'پرسش ' + (questionIndex + 1) + ' از ' + quizQuestions.length;
+  progress.textContent = 'السؤال ' + toArabicDigits(questionIndex + 1) + ' من ' + toArabicDigits(quizQuestions.length);
   content.innerHTML =
     '<div class="quiz-card">' +
       '<div class="quiz-emoji" aria-hidden="true">' + question.emoji + '</div>' +
       '<p class="quiz-prompt">' + question.prompt + '</p>' +
-      '<div class="answers" role="group" aria-label="پاسخ‌ها">' +
-        question.choices.map((choice) => '<button class="answer" type="button" data-answer="' + choice + '">' + choice + '</button>').join('') +
+      '<div class="answers" role="group" aria-label="الإجابات">' +
+        question.choices.map((choice) => {
+          const label = activeKey === 'math' ? toArabicDigits(choice) : choice;
+          return '<button class="answer" type="button" data-answer="' + choice + '">' + label + '</button>';
+        }).join('') +
       '</div>' +
       '<p class="feedback" id="feedback" aria-live="polite"></p>' +
-      '<button class="next-button" id="nextQuestion" type="button" hidden>پرسش بعدی ←</button>' +
+      '<button class="next-button" id="nextQuestion" type="button" hidden>السؤال التالي ←</button>' +
     '</div>';
   answered = false;
 }
 
 function showFinish() {
-  progress.textContent = 'پایان بازی';
+  progress.textContent = 'نهاية اللعبة';
   const total = 3;
   const stars = score === total ? '⭐⭐⭐' : score > 0 ? '⭐⭐' : '🌟';
   content.innerHTML =
     '<div class="quiz-card finish-card">' +
       '<div class="quiz-emoji" aria-hidden="true">' + (score === total ? '🏆' : '🎉') + '</div>' +
-      '<div class="quiz-prompt">آفرین! بازی را تمام کردی.</div>' +
-      '<div class="finish-note">' + stars + '<br>از ۳ پرسش، ' + score + ' پاسخ درست داشتی.<br>هر بار که بازی کنی، چیز تازه‌ای یاد می‌گیری.</div>' +
-      '<button class="next-button" id="replayGame" type="button">یک بار دیگر بازی کنیم؟</button>' +
+      '<div class="quiz-prompt">أحسنت! لقد أنهيت اللعبة.</div>' +
+      '<div class="finish-note">' + stars + '<br>من ٣ أسئلة، ' + toArabicDigits(score) + ' إجابات صحيحة.<br>ستتعلّم شيئًا جديدًا في كل مرة تلعب فيها.</div>' +
+      '<button class="next-button" id="replayGame" type="button">هل نلعب مرة أخرى؟</button>' +
     '</div>';
 }
 
@@ -163,15 +170,15 @@ content.addEventListener('click', (event) => {
     const isCorrect = answerButton.dataset.answer === question.answer;
     if (isCorrect) {
       score += 1;
-      document.querySelector('#feedback').textContent = 'آفرین! ' + (question.fact || activities[activeKey].success);
+      document.querySelector('#feedback').textContent = 'أحسنت! ' + (question.fact || activities[activeKey].success);
     } else {
       answerButton.classList.add('wrong');
-      document.querySelector('#feedback').textContent = 'اشکالی ندارد! ' + (question.fact || ('پاسخ درست «' + question.answer + '» بود.'));
+      document.querySelector('#feedback').textContent = 'لا بأس! ' + (question.fact || ('الإجابة الصحيحة «' + question.answer + '» هي.'));
     }
     answered = true;
     const next = document.querySelector('#nextQuestion');
     next.hidden = false;
-    next.textContent = questionIndex === quizQuestions.length - 1 ? 'دیدن نتیجه' : 'پرسش بعدی ←';
+    next.textContent = questionIndex === quizQuestions.length - 1 ? 'عرض النتيجة' : 'السؤال التالي ←';
   }
 
   if (event.target.closest('#nextQuestion') && answered) {
