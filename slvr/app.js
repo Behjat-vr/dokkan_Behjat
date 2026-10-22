@@ -1,6 +1,7 @@
 const films = {
-  youtube: { type: 'youtube', id: 'incY1Y9qgQU', title: 'عجائب القرآن' },
-  aparat: { type: 'aparat', id: 'y053odm', title: 'مغامرة كرتونية' }
+  soul: { id: 'k83c32a', title: 'روح' },
+  kungfu: { id: 'bho4b94', title: 'كونغ فو باندا ١' },
+  spies: { id: 'aztr19j', title: 'جواسيس متخفّون' }
 };
 
 const playerLayer = document.querySelector('#playerLayer');
@@ -22,13 +23,8 @@ function playFilm(key) {
 
   playerLayer.hidden = false;
   playerMount.replaceChildren();
-  if (film.type === 'youtube') {
-    const params = new URLSearchParams({ autoplay: '1', playsinline: '1', rel: '0' });
-    playerMount.appendChild(makeIframe(`https://www.youtube.com/embed/${film.id}?${params}`, film.title));
-  } else {
-    const params = new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' });
-    playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
-  }
+  const params = new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' });
+  playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
 
   if (typeof playerLayer.requestFullscreen === 'function') {
     try {

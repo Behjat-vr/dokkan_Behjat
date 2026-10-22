@@ -4,28 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#dff7ff">
-  <meta name="description" content="قصتان كرتونيتان للمشاهدة في سينما SLVR">
+  <meta name="description" content="ثلاثة أفلام كرتونية للمشاهدة في سينما SLVR">
   <title>SLVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=arabic-kids-2">
-  <script src="app.js?v=arabic-kids-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=posters-1">
+  <script src="app.js?v=posters-1" defer></script>
 </head>
 <body>
   <main class="home">
     <div class="brand" aria-label="SLVR">SLVR</div>
-    <h1>اختر حكايتك</h1>
+    <h1>اختر مغامرتك</h1>
     <section class="film-cards" aria-label="الأفلام الكرتونية">
-      <button class="film-card" type="button" data-film="youtube" aria-label="شغّل عجائب القرآن">
-        <span class="poster poster-youtube">
+      <button class="film-card" type="button" data-film="soul" aria-label="شغّل روح">
+        <span class="poster">
+          <img src="posters/soul.jpg" alt="" decoding="async">
           <span class="play-icon" aria-hidden="true">▶</span>
         </span>
-        <span class="film-title">عجائب القرآن</span>
+        <span class="film-title">روح</span>
       </button>
-      <button class="film-card" type="button" data-film="aparat" aria-label="شغّل مغامرة كرتونية">
-        <span class="poster poster-aparat" aria-hidden="true"><span class="aparat-glyph">✦</span><span class="play-icon">▶</span></span>
-        <span class="film-title">مغامرة كرتونية</span>
+      <button class="film-card" type="button" data-film="kungfu" aria-label="شغّل كونغ فو باندا ١">
+        <span class="poster">
+          <img src="posters/kung-fu-panda.jpg" alt="" decoding="async">
+          <span class="play-icon" aria-hidden="true">▶</span>
+        </span>
+        <span class="film-title">كونغ فو باندا ١</span>
+      </button>
+      <button class="film-card" type="button" data-film="spies" aria-label="شغّل جواسيس متخفّون">
+        <span class="poster">
+          <img src="posters/spies-in-disguise.jpg" alt="" decoding="async">
+          <span class="play-icon" aria-hidden="true">▶</span>
+        </span>
+        <span class="film-title">جواسيس متخفّون</span>
       </button>
     </section>
   </main>
