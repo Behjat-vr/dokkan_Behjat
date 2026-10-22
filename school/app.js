@@ -170,7 +170,7 @@ content.addEventListener('click', (event) => {
     const isCorrect = answerButton.dataset.answer === question.answer;
     if (isCorrect) {
       score += 1;
-      document.querySelector('#feedback').textContent = 'أحسنت! ' + (question.fact || activities[activeKey].success);
+      document.querySelector('#feedback').textContent = question.fact ? 'أحسنت! ' + question.fact : activities[activeKey].success;
     } else {
       answerButton.classList.add('wrong');
       document.querySelector('#feedback').textContent = 'لا بأس! ' + (question.fact || ('الإجابة الصحيحة «' + question.answer + '» هي.'));
