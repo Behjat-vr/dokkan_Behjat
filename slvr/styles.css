@@ -46,15 +46,40 @@ button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
   justify-content: center;
   padding: max(64px, env(safe-area-inset-top)) 24px max(36px, env(safe-area-inset-bottom));
 }
+.home::after { position: absolute; z-index: 0; top: 50%; left: 50%; width: clamp(210px, 42vw, 440px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,.8) 0%, rgba(255,255,255,.36) 43%, transparent 72%); content: ""; opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(.72); }
 .brand {
+  --brand-top: max(24px, env(safe-area-inset-top));
+  --brand-left: max(28px, env(safe-area-inset-left));
+  --brand-size: 17px;
+  --brand-spacing: 4px;
   position: absolute;
-  top: max(24px, env(safe-area-inset-top));
-  left: max(28px, env(safe-area-inset-left));
+  z-index: 2;
+  top: var(--brand-top);
+  left: var(--brand-left);
   color: #4057bd;
   direction: ltr;
-  font-size: 17px;
+  font-size: var(--brand-size);
   font-weight: 800;
-  letter-spacing: 4px;
+  letter-spacing: var(--brand-spacing);
+  white-space: nowrap;
+}
+body.intro-active { overflow: hidden; }
+body.intro-active .brand { z-index: 5; animation: brand-intro 1900ms cubic-bezier(.2,.8,.2,1) both; }
+body.intro-active .home::after { animation: intro-glow 1900ms ease-out both; }
+body.intro-active .home > h1,
+body.intro-active .film-cards { opacity: 0; visibility: hidden; transform: translateY(18px) scale(.97); }
+@keyframes brand-intro {
+  0% { top: 50%; left: 50%; opacity: 0; font-size: clamp(64px, 14vw, 126px); letter-spacing: .15em; text-shadow: 0 0 0 rgba(64,87,189,0); transform: translate(-50%, -50%) scale(.18) rotate(-13deg); }
+  13% { opacity: 1; text-shadow: 0 8px 0 rgba(255,255,255,.78), 0 18px 34px rgba(64,87,189,.26); transform: translate(-50%, -50%) scale(1.13) rotate(4deg); }
+  21% { transform: translate(-50%, -50%) scale(.94) rotate(-2deg); }
+  29%, 45% { transform: translate(-50%, -50%) scale(1) rotate(0); }
+  100% { top: var(--brand-top); left: var(--brand-left); opacity: 1; font-size: var(--brand-size); letter-spacing: var(--brand-spacing); text-shadow: 0 2px 0 rgba(255,255,255,.8), 0 6px 16px rgba(64,87,189,.12); transform: none; }
+}
+@keyframes intro-glow {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.5); }
+  18% { opacity: 1; }
+  54% { opacity: .8; transform: translate(-50%, -50%) scale(1.08); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.35); }
 }
 .ambient-star {
   position: absolute;
@@ -162,7 +187,7 @@ h1 { margin: 0 0 30px; color: #29436c; font-size: clamp(23px, 3.5vw, 32px); font
 }
 @media (orientation: landscape) and (max-height: 560px) {
   .home { justify-content: center; padding: max(38px, env(safe-area-inset-top)) 18px max(12px, env(safe-area-inset-bottom)); }
-  .brand { top: max(8px, env(safe-area-inset-top)); left: max(16px, env(safe-area-inset-left)); font-size: 14px; letter-spacing: 3px; }
+  .brand { --brand-top: max(8px, env(safe-area-inset-top)); --brand-left: max(16px, env(safe-area-inset-left)); --brand-size: 14px; --brand-spacing: 3px; }
   h1 { margin-bottom: clamp(8px, 2.5vh, 18px); font-size: clamp(20px, 3.3vw, 27px); }
   .film-cards { width: min(960px, 100%); gap: clamp(9px, 2vw, 18px); }
   .film-card { padding-bottom: 7px; border-width: 3px; border-radius: 16px; }
@@ -173,4 +198,7 @@ h1 { margin: 0 0 30px; color: #29436c; font-size: clamp(23px, 3.5vw, 32px); font
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
+  body.intro-active .brand { top: var(--brand-top); left: var(--brand-left); font-size: var(--brand-size); letter-spacing: var(--brand-spacing); opacity: 1; transform: none; }
+  body.intro-active .home::after { display: none; }
+  body.intro-active .home > h1, body.intro-active .film-cards { opacity: 1; visibility: visible; transform: none; }
 }

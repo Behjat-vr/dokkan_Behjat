@@ -7,6 +7,9 @@ const films = {
 const playerLayer = document.querySelector('#playerLayer');
 const playerMount = document.querySelector('#playerMount');
 const home = document.querySelector('.home');
+const brand = document.querySelector('.brand');
+const heading = home.querySelector('h1');
+const filmCards = [...document.querySelectorAll('.film-card')];
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function playMotion(element, frames, options) {
@@ -53,13 +56,33 @@ function addAmbientStars() {
 }
 
 addAmbientStars();
-document.querySelectorAll('.film-card').forEach((card, index) => {
-  addCardTilt(card);
-  playMotion(card, [
-    { opacity: 0, transform: 'translateY(20px) scale(.94)' },
-    { opacity: 1, transform: 'translateY(0) scale(1)' }
-  ], { duration: 480, delay: index * 85, easing: 'cubic-bezier(.2,.8,.2,1)' });
-});
+
+function revealCinema() {
+  document.body.classList.remove('intro-active');
+  playMotion(heading, [
+    { opacity: 0, transform: 'translateY(16px)' },
+    { opacity: 1, transform: 'translateY(0)' }
+  ], { duration: 420, easing: 'cubic-bezier(.2,.8,.2,1)' });
+
+  filmCards.forEach((card, index) => {
+    addCardTilt(card);
+    playMotion(card, [
+      { opacity: 0, transform: 'translateY(22px) scale(.93)' },
+      { opacity: 1, transform: 'translateY(0) scale(1)' }
+    ], { duration: 480, delay: 90 + index * 90, easing: 'cubic-bezier(.2,.8,.2,1)' });
+  });
+}
+
+if (reduceMotion) {
+  revealCinema();
+} else {
+  let introFallback = window.setTimeout(revealCinema, 2300);
+  brand.addEventListener('animationend', (event) => {
+    if (event.animationName !== 'brand-intro') return;
+    window.clearTimeout(introFallback);
+    revealCinema();
+  }, { once: true });
+}
 
 function makeIframe(src, title) {
   const iframe = document.createElement('iframe');
