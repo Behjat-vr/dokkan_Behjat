@@ -3,104 +3,37 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#110e14">
-  <meta name="description" content="سینمای کوچک SLVR؛ دو قصه‌ی تصویری در فضای بازی">
-  <title>SLVR | سینمای بازی</title>
+  <meta name="theme-color" content="#111216">
+  <meta name="description" content="دو انیمیشن برای تماشای تمام‌صفحه در سینمای SLVR">
+  <title>SLVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="ambient ambient-top" aria-hidden="true"></div>
-  <div class="cinema-shell">
-    <header class="topbar">
-      <a class="brand" href="#home" aria-label="SLVR Cinema">
-        <span class="brand-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span class="brand-word">SLVR</span>
-      </a>
-      <span class="header-divider" aria-hidden="true"></span>
-      <div class="room-label"><span class="room-light"></span><span>سینمای کوچک</span><span class="room-code">سالن ۰۱</span></div>
-      <button class="fullscreen-button" id="fullscreenButton" type="button" aria-label="نمایش تمام‌صفحه" title="نمایش تمام‌صفحه">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4M16 4h4v4M4 16v4h4M20 16v4h-4"></path></svg>
+  <main class="home">
+    <div class="brand" aria-label="SLVR">SLVR</div>
+    <h1>قصه‌تو انتخاب کن</h1>
+    <section class="film-cards" aria-label="انیمیشن‌ها">
+      <button class="film-card" type="button" data-film="youtube" aria-label="پخش قصص عجایب قرآن">
+        <span class="poster poster-youtube">
+          <img src="https://i.ytimg.com/vi/incY1Y9qgQU/hqdefault.jpg" alt="" referrerpolicy="strict-origin-when-cross-origin">
+          <span class="play-icon" aria-hidden="true">▶</span>
+        </span>
+        <span class="film-title">قصص عجایب قرآن</span>
       </button>
-    </header>
+      <button class="film-card" type="button" data-film="aparat" aria-label="پخش انیمیشن دوم">
+        <span class="poster poster-aparat" aria-hidden="true"><span class="aparat-glyph">✦</span><span class="play-icon">▶</span></span>
+        <span class="film-title">انیمیشن دوم</span>
+      </button>
+    </section>
+  </main>
 
-    <main class="cinema-layout" id="home">
-      <section class="screen-column" aria-label="پرده‌ی سینما">
-        <div class="screen-heading">
-          <div class="screen-heading-title"><span class="heading-star">✦</span><span>پرده‌ی نمایش</span></div>
-          <div class="screen-state" id="screenState"><span class="state-light"></span><span>آماده‌ی اکران</span></div>
-        </div>
-
-        <div class="screen-frame" id="screenFrame">
-          <div class="marquee" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="screen-art art-youtube" id="screenArt">
-            <img class="youtube-poster" id="youtubePoster" src="https://i.ytimg.com/vi/incY1Y9qgQU/hqdefault.jpg" alt="" referrerpolicy="strict-origin-when-cross-origin">
-            <div class="art-fallback" id="artFallback" aria-hidden="true"><span class="fallback-reel">✦</span><span class="fallback-letter">A</span><span class="fallback-caption">APARAT</span></div>
-            <div class="screen-shade"></div>
-            <div class="screen-spark spark-one" aria-hidden="true">✦</div><div class="screen-spark spark-two" aria-hidden="true">✧</div>
-            <div class="screen-promo">
-              <span class="now-showing"><i></i> اکران ویژه</span>
-              <h1 id="filmTitle">قصص عجایب قرآن</h1>
-              <p id="filmSubtitle">برصیصا · قسمت ۲۷، بخش اول</p>
-              <button class="screen-play-button" id="screenPlayButton" type="button" aria-label="شروع پخش فیلم انتخاب‌شده">
-                <span class="play-triangle">▶</span><span>شروع اکران</span>
-              </button>
-            </div>
-            <div class="screen-corner-mark" aria-hidden="true"><span>SLVR</span><i></i><i></i></div>
-          </div>
-
-          <div class="screen-player" id="screenPlayer" hidden>
-            <div class="player-toolbar"><span class="player-now"><i></i> در حال پخش</span><button id="closePlayback" type="button">بازگشت به پرده <span>↩</span></button></div>
-            <div class="player-mount" id="playerMount"></div>
-          </div>
-          <div class="screen-frame-bottom" aria-hidden="true"><span></span><span></span></div>
-        </div>
-
-        <div class="film-caption">
-          <div class="caption-copy"><div class="caption-kicker" id="filmSource">قصه‌ی تصویری · YouTube</div><h2 id="captionTitle">قصص عجایب قرآن</h2><p id="captionDescription">یک قصه‌ی تصویری از مجموعه‌ی قصص عجایب قرآن</p></div>
-          <div class="caption-actions"><span class="ticket-count"><span>▰</span> بلیت این سانس: <b>رایگان</b></span><button class="caption-play" id="captionPlayButton" type="button">پخش در سینما <span>←</span></button></div>
-        </div>
-      </section>
-
-      <aside class="film-rail" aria-label="برنامه‌ی نمایش">
-        <div class="rail-heading"><div><span class="rail-kicker">برنامه‌ی امشب</span><h2>کدوم قصه؟</h2></div><span class="film-count"><b>۰۲</b><small>فیلم</small></span></div>
-
-        <div class="ticket-list" role="group" aria-label="انتخاب فیلم">
-          <button class="film-ticket selected" type="button" data-film="youtube" aria-pressed="true">
-            <span class="ticket-index">01</span>
-            <span class="ticket-art ticket-art-youtube"><img src="https://i.ytimg.com/vi/incY1Y9qgQU/mqdefault.jpg" alt="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"><i>▶</i></span>
-            <span class="ticket-info"><span class="ticket-source youtube-label">از YouTube</span><b>قصص عجایب قرآن</b><small>برصیصا · بخش اول</small></span>
-            <span class="ticket-arrow" aria-hidden="true">←</span>
-            <span class="ticket-perforation" aria-hidden="true"></span>
-          </button>
-
-          <button class="film-ticket" type="button" data-film="aparat" aria-pressed="false">
-            <span class="ticket-index">02</span>
-            <span class="ticket-art ticket-art-aparat"><span>A</span><i>▶</i></span>
-            <span class="ticket-info"><span class="ticket-source aparat-label">از آپارات</span><b>انیمیشن دوم</b><small>قصه‌ی تصویری · آپارات</small></span>
-            <span class="ticket-arrow" aria-hidden="true">←</span>
-            <span class="ticket-perforation" aria-hidden="true"></span>
-          </button>
-        </div>
-
-        <form class="link-ticket" id="customLinkForm">
-          <label for="videoLink"><span class="link-ticket-icon" aria-hidden="true">↗</span><span><b>یه قصه بیار روی پرده</b><small>YouTube، آپارات یا فایل MP4 / WebM</small></span></label>
-          <div class="link-ticket-controls"><input id="videoLink" name="videoLink" type="url" inputmode="url" dir="ltr" autocomplete="url" placeholder="https://…" aria-label="لینک ویدئو" required><button type="submit">پخش لینک <span>←</span></button></div>
-        </form>
-
-        <div class="rail-note"><span class="note-icon" aria-hidden="true">✦</span><div><b>چراغ‌ها خاموش، قصه‌ها روشن</b><small>فیلم رو انتخاب کن و بزن بریم!</small></div></div>
-        <div class="ticket-stub" aria-label="بلیت سینما">
-          <span class="stub-stars" aria-hidden="true">✧ &nbsp; ✦ &nbsp; ✧</span><span class="stub-brand">SLVR <b>CINEMA</b></span><span class="stub-line"></span><span class="stub-text">یه صندلی برای خیال‌پردازی</span><span class="stub-seat">ROW 01 · SEAT 02</span>
-        </div>
-      </aside>
-    </main>
-
-    <footer class="footer"><span>SLVR <i>·</i> سینمای بازی</span><span class="footer-lights" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span>چراغ‌ها کم، خیال‌ها زیاد <b>✦</b></span></footer>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <section class="player-layer" id="playerLayer" role="dialog" aria-modal="true" aria-label="پخش انیمیشن" hidden>
+    <button class="close-player" id="closePlayer" type="button" aria-label="بستن پخش">×</button>
+    <div class="player-mount" id="playerMount"></div>
+  </section>
 </body>
 </html>
