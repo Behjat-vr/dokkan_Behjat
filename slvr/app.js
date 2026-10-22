@@ -26,7 +26,7 @@ function playFilm(key) {
     const params = new URLSearchParams({ autoplay: '1', playsinline: '1', rel: '0' });
     playerMount.appendChild(makeIframe(`https://www.youtube.com/embed/${film.id}?${params}`, film.title));
   } else {
-    const params = new URLSearchParams({ autoplay: 'true', titleShow: 'false' });
+    const params = new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' });
     playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
   }
 
