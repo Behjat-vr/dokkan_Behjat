@@ -24,16 +24,10 @@ function playFilm(key) {
   playerMount.replaceChildren();
   if (film.type === 'youtube') {
     const params = new URLSearchParams({ autoplay: '1', playsinline: '1', rel: '0' });
-    playerMount.appendChild(makeIframe(`https://www.youtube-nocookie.com/embed/${film.id}?${params}`, film.title));
+    playerMount.appendChild(makeIframe(`https://www.youtube.com/embed/${film.id}?${params}`, film.title));
   } else {
-    const host = document.createElement('div');
-    host.id = `aparat-${Date.now()}`;
-    host.className = 'aparat-host';
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = `https://www.aparat.com/embed/${film.id}?data[rnddiv]=${host.id}&data[responsive]=yes&data[autoplay]=true&titleShow=false`;
-    host.appendChild(script);
-    playerMount.appendChild(host);
+    const params = new URLSearchParams({ autoplay: 'true', titleShow: 'false' });
+    playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
   }
 
   if (typeof playerLayer.requestFullscreen === 'function') {
