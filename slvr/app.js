@@ -1,6 +1,6 @@
 const films = {
-  youtube: { type: 'youtube', id: 'incY1Y9qgQU', title: 'قصص عجایب قرآن' },
-  aparat: { type: 'aparat', id: 'y053odm', title: 'انیمیشن دوم' }
+  youtube: { type: 'youtube', id: 'incY1Y9qgQU', title: 'عجائب القرآن' },
+  aparat: { type: 'aparat', id: 'y053odm', title: 'مغامرة كرتونية' }
 };
 
 const playerLayer = document.querySelector('#playerLayer');

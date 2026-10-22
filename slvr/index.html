@@ -1,38 +1,38 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#111216">
-  <meta name="description" content="دو انیمیشن برای تماشای تمام‌صفحه در سینمای SLVR">
+  <meta name="theme-color" content="#dff7ff">
+  <meta name="description" content="قصتان كرتونيتان للمشاهدة في سينما SLVR">
   <title>SLVR</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=1e49d4f">
-  <script src="app.js?v=1e49d4f" defer></script>
+  <link rel="stylesheet" href="styles.css?v=arabic-kids-1">
+  <script src="app.js?v=arabic-kids-1" defer></script>
 </head>
 <body>
   <main class="home">
     <div class="brand" aria-label="SLVR">SLVR</div>
-    <h1>قصه‌تو انتخاب کن</h1>
-    <section class="film-cards" aria-label="انیمیشن‌ها">
-      <button class="film-card" type="button" data-film="youtube" aria-label="پخش قصص عجایب قرآن">
+    <h1>اختر حكايتك</h1>
+    <section class="film-cards" aria-label="الأفلام الكرتونية">
+      <button class="film-card" type="button" data-film="youtube" aria-label="شغّل عجائب القرآن">
         <span class="poster poster-youtube">
           <img src="https://i.ytimg.com/vi/incY1Y9qgQU/hqdefault.jpg" alt="" referrerpolicy="strict-origin-when-cross-origin">
           <span class="play-icon" aria-hidden="true">▶</span>
         </span>
-        <span class="film-title">قصص عجایب قرآن</span>
+        <span class="film-title">عجائب القرآن</span>
       </button>
-      <button class="film-card" type="button" data-film="aparat" aria-label="پخش انیمیشن دوم">
+      <button class="film-card" type="button" data-film="aparat" aria-label="شغّل مغامرة كرتونية">
         <span class="poster poster-aparat" aria-hidden="true"><span class="aparat-glyph">✦</span><span class="play-icon">▶</span></span>
-        <span class="film-title">انیمیشن دوم</span>
+        <span class="film-title">مغامرة كرتونية</span>
       </button>
     </section>
   </main>
 
-  <section class="player-layer" id="playerLayer" role="dialog" aria-modal="true" aria-label="پخش انیمیشن" hidden>
-    <button class="close-player" id="closePlayer" type="button" aria-label="بستن پخش">×</button>
+  <section class="player-layer" id="playerLayer" role="dialog" aria-modal="true" aria-label="مشغل الفيديو" hidden>
+    <button class="close-player" id="closePlayer" type="button" aria-label="إغلاق المشغل">×</button>
     <div class="player-mount" id="playerMount"></div>
   </section>
 </body>
