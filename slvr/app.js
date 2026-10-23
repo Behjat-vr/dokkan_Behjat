@@ -1,7 +1,7 @@
 const films = {
   soul: { provider: 'aparat', id: 'k83c32a', title: 'روح' },
   kungfu: { provider: 'aparat', id: 'bho4b94', title: 'كونغ فو باندا ١' },
-  caminandes: { provider: 'youtube', id: 'SkVqJ1SGeL0', title: 'كاميانديز: لاميجوس' }
+  caminandes: { provider: 'peertube', id: '5ruRYckTcQMTMQvyqMnVsr', title: 'كاميانديز: لاميجوس' }
 };
 
 const playerLayer = document.querySelector('#playerLayer');
@@ -88,7 +88,8 @@ function makeIframe(src, title) {
   const iframe = document.createElement('iframe');
   iframe.title = title;
   iframe.src = src;
-  iframe.allow = 'autoplay; encrypted-media';
+  iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  iframe.allowFullscreen = true;
   iframe.referrerPolicy = 'strict-origin-when-cross-origin';
   return iframe;
 }
@@ -103,8 +104,8 @@ function playFilm(key) {
     { opacity: 0.55, transform: 'scale(.99)' },
     { opacity: 1, transform: 'scale(1)' }
   ], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' });
-  const embedUrl = film.provider === 'youtube'
-    ? `https://www.youtube.com/embed/${film.id}?autoplay=1&playsinline=1&rel=0`
+  const embedUrl = film.provider === 'peertube'
+    ? `https://video.blender.org/videos/embed/${film.id}?${new URLSearchParams({ autoplay: '1', muted: '1', title: '0', warningTitle: '0', controlBar: '1', peertubeLink: '0', p2p: '0' })}`
     : `https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' })}`;
   playerMount.appendChild(makeIframe(embedUrl, film.title));
 
