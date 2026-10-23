@@ -88,8 +88,7 @@ function makeIframe(src, title) {
   const iframe = document.createElement('iframe');
   iframe.title = title;
   iframe.src = src;
-  iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-  iframe.allowFullscreen = true;
+  iframe.allow = 'autoplay; encrypted-media';
   iframe.referrerPolicy = 'strict-origin-when-cross-origin';
   return iframe;
 }
@@ -107,21 +106,11 @@ function playFilm(key) {
   const params = new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' });
   playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
 
-  if (typeof playerLayer.requestFullscreen === 'function') {
-    try {
-      const request = playerLayer.requestFullscreen({ navigationUI: 'hide' });
-      request?.catch(() => {});
-    } catch {}
-  }
 }
 
 function closePlayer() {
   playerMount.replaceChildren();
   playerLayer.hidden = true;
-  if (document.fullscreenElement === playerLayer) {
-    const request = document.exitFullscreen?.();
-    request?.catch(() => {});
-  }
   playMotion(home, [
     { opacity: 0.72, transform: 'scale(.985)' },
     { opacity: 1, transform: 'scale(1)' }
@@ -134,7 +123,4 @@ document.querySelectorAll('[data-film]').forEach((card) => {
 document.querySelector('#closePlayer').addEventListener('click', closePlayer);
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !playerLayer.hidden) closePlayer();
-});
-document.addEventListener('fullscreenchange', () => {
-  if (document.fullscreenElement !== playerLayer && !playerLayer.hidden) closePlayer();
 });

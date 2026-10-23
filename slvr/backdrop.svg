@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.15" y2="1">
+      <stop offset="0" stop-color="#b6ebff"/>
+      <stop offset="0.56" stop-color="#e5f8ff"/>
+      <stop offset="1" stop-color="#fff4dd"/>
+    </linearGradient>
+    <linearGradient id="hill-far" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c5efd9"/>
+      <stop offset="1" stop-color="#a6dfc5"/>
+    </linearGradient>
+    <linearGradient id="hill-mid" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0" stop-color="#9edbc2"/>
+      <stop offset="1" stop-color="#bde8c7"/>
+    </linearGradient>
+    <linearGradient id="hill-front" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#f6d98c"/>
+      <stop offset="1" stop-color="#f6c77e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <path d="M-40 205 C150 165 290 210 445 183 S745 164 900 199 S1190 219 1380 177 S1550 176 1650 194" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="18" opacity=".28"/>
+  <path d="M-30 260 C185 231 332 268 505 245 S810 230 995 258 S1305 273 1640 233" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="8" opacity=".24"/>
+  <g fill="#fff" opacity=".76">
+    <path d="M211 326 l7 18 18 7 -18 7 -7 18 -7-18 -18-7 18-7z"/>
+    <path d="M487 145 l5 13 13 5 -13 5 -5 13 -5-13 -13-5 13-5z"/>
+    <path d="M832 312 l6 15 15 6 -15 6 -6 15 -6-15 -15-6 15-6z"/>
+    <path d="M1120 143 l5 12 12 5 -12 5 -5 12 -5-12 -12-5 12-5z"/>
+    <path d="M1371 318 l7 17 17 7 -17 7 -7 17 -7-17 -17-7 17-7z"/>
+  </g>
+  <g fill="#ffba61" opacity=".75">
+    <path d="M350 420 l4 10 10 4 -10 4 -4 10 -4-10 -10-4 10-4z"/>
+    <path d="M1007 390 l4 10 10 4 -10 4 -4 10 -4-10 -10-4 10-4z"/>
+    <path d="M1262 480 l3 8 8 3 -8 3 -3 8 -3-8 -8-3 8-3z"/>
+  </g>
+  <path d="M-30 698 C130 650 300 644 468 688 C628 731 760 751 910 697 C1072 638 1206 635 1350 675 C1470 709 1560 698 1640 666 L1640 930 L-30 930Z" fill="url(#hill-far)"/>
+  <path d="M-30 772 C133 716 302 711 456 754 C610 796 756 825 934 767 C1105 711 1279 703 1437 748 C1520 772 1588 773 1640 751 L1640 930 L-30 930Z" fill="url(#hill-mid)"/>
+  <path d="M-30 836 C171 784 341 790 510 833 C702 882 860 887 1036 834 C1217 779 1390 780 1640 842 L1640 930 L-30 930Z" fill="url(#hill-front)"/>
+  <g fill="none" stroke="#fff" stroke-linecap="round" opacity=".34">
+    <path d="M74 720 C118 703 155 703 201 720" stroke-width="5"/>
+    <path d="M1269 713 C1310 697 1354 699 1393 714" stroke-width="5"/>
+    <path d="M426 801 C468 789 502 791 539 804" stroke-width="4"/>
+  </g>
+</svg>

@@ -15,22 +15,7 @@ body {
   min-height: 100vh;
   min-height: 100svh;
   overflow-x: hidden;
-  background:
-    radial-gradient(ellipse at 7% 83%, rgba(154, 235, 190, .7) 0 11%, transparent 11.3%),
-    radial-gradient(ellipse at 94% 82%, rgba(255, 218, 137, .72) 0 12%, transparent 12.3%),
-    radial-gradient(circle at 88% 12%, rgba(255, 223, 122, .9) 0 72px, transparent 73px),
-    linear-gradient(155deg, #b9efff 0%, #e5faff 48%, #fff6dc 100%);
-}
-body::before {
-  position: fixed;
-  z-index: 0;
-  top: 23%;
-  right: 9%;
-  color: #ff8c9d;
-  content: "✦";
-  font-size: 34px;
-  text-shadow: -210px 205px 0 #8975df, 190px -72px 0 #ffb857;
-  pointer-events: none;
+  background: #dff7ff url("backdrop.svg") center center / cover fixed no-repeat;
 }
 button { font: inherit; -webkit-tap-highlight-color: transparent; }
 button:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
@@ -152,7 +137,6 @@ h1 { margin: 0 0 30px; color: #29436c; font-size: clamp(23px, 3.5vw, 32px); font
 }
 
 .player-layer { position: fixed; z-index: 20; inset: 0; display: grid; width: 100%; height: 100vh; height: 100dvh; place-items: center; overflow: hidden; background: #000; }
-.player-layer:fullscreen { width: 100%; height: 100%; }
 .player-mount { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
 .player-mount iframe, .player-mount video { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; background: #000; }
 .player-mount video { object-fit: contain; }
