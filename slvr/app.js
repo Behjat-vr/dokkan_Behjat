@@ -1,7 +1,7 @@
 const films = {
-  soul: { id: 'k83c32a', title: 'روح' },
-  kungfu: { id: 'bho4b94', title: 'كونغ فو باندا ١' },
-  spies: { id: 'aztr19j', title: 'جواسيس متخفّون' }
+  soul: { provider: 'aparat', id: 'k83c32a', title: 'روح' },
+  kungfu: { provider: 'aparat', id: 'bho4b94', title: 'كونغ فو باندا ١' },
+  caminandes: { provider: 'youtube', id: 'SkVqJ1SGeL0', title: 'كاميانديز: لاميجوس' }
 };
 
 const playerLayer = document.querySelector('#playerLayer');
@@ -103,8 +103,10 @@ function playFilm(key) {
     { opacity: 0.55, transform: 'scale(.99)' },
     { opacity: 1, transform: 'scale(1)' }
   ], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' });
-  const params = new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' });
-  playerMount.appendChild(makeIframe(`https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${params}`, film.title));
+  const embedUrl = film.provider === 'youtube'
+    ? `https://www.youtube.com/embed/${film.id}?autoplay=1&playsinline=1&rel=0`
+    : `https://www.aparat.com/video/video/embed/videohash/${film.id}/vt/frame?${new URLSearchParams({ autoplay: 'true', muted: 'true', titleShow: 'false' })}`;
+  playerMount.appendChild(makeIframe(embedUrl, film.title));
 
 }
 
